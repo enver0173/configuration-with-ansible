@@ -11,7 +11,8 @@
       package:
         name: kernel
         state: latest
-    
+
+        
     - name: Restart
       when: (ansible_facts['distribution'] == "CentOS" and ansible_facts['distribution_major_version'] == "6")
       package: "/sbin/shutdown -r now"
