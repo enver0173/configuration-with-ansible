@@ -1,0 +1,14 @@
+---
+- name: Zip logs
+  hosts: all
+  become: true
+  become_method: sudo
+  connection: ssh
+  ignore_errors: false
+  tasks:
+    - name: Perform find command
+      shell: "find  /var/log/ -type f  -name  *.lo -mtime +90 -exec gzip -v9 {} \;"
+
+    - name: perform find command on size of a file
+      shell: "find  /var/log/ -type f  -size +1G -name  *.log -exec gzip -v9 {} \;"
+      
