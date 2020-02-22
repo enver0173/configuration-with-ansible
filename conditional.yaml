@@ -1,5 +1,5 @@
-----
-- name:  Conditional Playbook
+---
+- name: Conditional Playbook
   hosts: all
   become: true
   become_method: sudo
@@ -7,12 +7,12 @@
   ignore_errors: false
   tasks:
     - name: Install on centos 6 only
-      when: (ansible_facts[‘distribution’] == “CentOS” and ansible_facts[‘distribution_major_version’] == “6")
-      package:
+      when: (ansible_facts['distribution'] == "CentOS" and ansible_facts['distribution_major_version'] == "6")
+      package: 
         name: kernel
         state: latest
 
 
     - name: Restart
-      when: (ansible_facts[‘distribution’] == “CentOS” and ansible_facts[‘distribution_major_version’] == “6")
-      shell: “/sbin/shutdown -r now”
+      when: (ansible_facts['distribution'] == "CentOS" and ansible_facts['distribution_major_version'] == "6")
+      shell: "/sbin/shutdown -r now"
