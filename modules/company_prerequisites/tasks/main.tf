@@ -1,4 +1,4 @@
-- name: create a repo
+- name: Creates a repo
   copy:
     src: r1soft.repo
     dest: /etc/yum.repos.d/r1soft.repo
@@ -7,13 +7,12 @@
   package:
     name: serverbackup-enterprise-agent
     state: latest
-  notify: R1soft RESTART
-    
+  notify: 
+    - R1soft RESTART
+    - GET KEY
+
 - name: Power off iptables
   systemd:
     name: firewalld
     state: stopped
-    ignore_errors: true
-
-    - name: get key
-      shell: r1soft-setup --get-key http://backup.enverguner.com
+  ignore_errors: true
