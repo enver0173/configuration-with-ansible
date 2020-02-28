@@ -1,0 +1,28 @@
+---
+- name: Conditional Playbook
+  hosts: all
+  become: true
+  become_method: sudo
+  connection: ssh
+  ignore_errors: false
+  tasks:
+    - name: take input
+      package: 
+        name: httpd
+        state: latest
+      notify: HTTPD RESTART
+    - name: Install mysql
+      package:
+        name: mariadb-server
+        state: present
+      notify: MYSQL RESTART
+
+  handlers:
+    - name: HTTPD RESTART
+      systemd:
+        name: httpd 
+        state: Restart
+    - name: MYSQL RESTART
+      systemd:
+        name: httpd 
+        state: Restart        
